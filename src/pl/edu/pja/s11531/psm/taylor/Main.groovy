@@ -14,11 +14,11 @@ def start, averageError, time
     start = System.currentTimeMillis();
     averageError = tester.test(Math.&sin, taylorSinFactory.getClosure(i));
     time = System.currentTimeMillis() - start;
-    println "calculation time = ${time / testsAmount} ms/op; average error = $averageError"
+    println "calculation time = ${time / testsAmount} ms/op; average error = ${averageError.toPlainString()}"
 
     print "Testing Taylor series cos at degree $i: "
     start = System.currentTimeMillis();
     averageError = tester.test(Math.&cos, taylorCosFactory.getClosure(i));
     time = System.currentTimeMillis() - start;
-    println "calculation time = ${time / testsAmount} ms/op; average error = $averageError\n"
+    println "calculation time = ${time / testsAmount} ms/op; average error = ${averageError.toPlainString()}\n"
 }

@@ -9,7 +9,7 @@ def testsAmount = 10000
 def tester = new ApproximationTester(testsAmount)
 def start, averageError, time
 
-(5..40).each { i ->
+(1..25).each { i ->
     print "Testing Taylor series sin at degree $i: "
     start = System.currentTimeMillis();
     averageError = tester.test(Math.&sin, taylorSinFactory.getClosure(i));
@@ -20,5 +20,5 @@ def start, averageError, time
     start = System.currentTimeMillis();
     averageError = tester.test(Math.&cos, taylorCosFactory.getClosure(i));
     time = System.currentTimeMillis() - start;
-    println "calculation time = ${time / testsAmount} ms/op; average error = $averageError"
+    println "calculation time = ${time / testsAmount} ms/op; average error = $averageError\n"
 }

@@ -8,10 +8,10 @@ class CosTaylorSeries extends TaylorSeries {
         def currentPower = 1.0
         def currentFactorial = 1G
         for (int i in 1..<degree) {
-            currentPower *= value * value;
-            currentFactorial *= 4 * i * i - 2 * i;
-            sum += (i % 2 ? -1 : 1) * currentPower / currentFactorial;
+            currentPower *= value * value
+            currentFactorial *= 4 * i * i - 2 * i
+            sum += (i % 2 ? -1 : 1) * currentPower / currentFactorial
         }
-        return sum;
+        return sum
     }
 }

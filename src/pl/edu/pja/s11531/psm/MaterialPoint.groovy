@@ -6,5 +6,4 @@ package pl.edu.pja.s11531.psm
 class MaterialPoint {
     BigDecimal mass
     Vector position
-    Vector velocity
 }

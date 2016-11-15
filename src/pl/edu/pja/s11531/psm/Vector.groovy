@@ -18,6 +18,10 @@ class Vector {
         this.scalars = scalars.clone()
     }
 
+    Vector(List<BigDecimal> scalars) {
+        this(scalars.toArray() as BigDecimal[])
+    }
+
     int getSize() {
         return scalars.length;
     }

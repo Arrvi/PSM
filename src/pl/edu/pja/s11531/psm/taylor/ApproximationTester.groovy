@@ -3,8 +3,6 @@ package pl.edu.pja.s11531.psm.taylor
 import org.codehaus.groovy.runtime.typehandling.BigDecimalMath
 
 import static groovyx.gpars.GParsPool.withPool
-@Grab(group = 'org.codehaus.gpars', module = 'gpars', version = '1.0.0')
-import static groovyx.gpars.GParsPool.withPool
 
 class ApproximationTester {
     static final def DEFAULT_TEST_AMOUNT = 1000
@@ -30,6 +28,6 @@ class ApproximationTester {
                 calculationProgress += 1 / testsAmount;
                 return BigDecimalMath.abs(error) / testsAmount;
             }).sumParallel();
-        }
+        } as BigDecimal
     }
 }

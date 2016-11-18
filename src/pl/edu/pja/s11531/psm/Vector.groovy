@@ -38,4 +38,8 @@ class Vector {
     Vector multiply(BigDecimal multiplier) {
         return new Vector(scalars.collect { it * multiplier }.toArray() as BigDecimal[])
     }
+
+    BigDecimal getAt(int index) {
+        scalars[index]
+    }
 }

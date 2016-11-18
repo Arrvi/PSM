@@ -26,6 +26,7 @@ class ThrowSimulation {
             if ( sleepAfterMove ) {
                 sleep((timeStep * 1000).setScale(0, RoundingMode.HALF_UP).intValue(), {condition={false}})
             }
+            println projectile.position
         }
     }
 

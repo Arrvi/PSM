@@ -6,7 +6,7 @@ package pl.edu.pja.s11531.psm
 class ConstantGravityPull implements ExternalForce {
     BigDecimal gravity
 
-    ConstantGravityPull(BigDecimal gravity=10.0) {
+    ConstantGravityPull(BigDecimal gravity=-10.0) {
         this.gravity = gravity
     }
 

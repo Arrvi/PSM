@@ -42,4 +42,9 @@ class Vector {
     BigDecimal getAt(int index) {
         scalars[index]
     }
+
+    @Override
+    String toString() {
+        return "[${scalars.join(', ')}]"
+    }
 }

@@ -40,7 +40,19 @@ class Vector {
     }
 
     BigDecimal getAt(int index) {
-        scalars[index]
+        scalars[index] ?: 0.0
+    }
+
+    BigDecimal getX() {
+        this[0]
+    }
+
+    BigDecimal getY() {
+        this[1]
+    }
+
+    BigDecimal getZ() {
+        this[2]
     }
 
     @Override

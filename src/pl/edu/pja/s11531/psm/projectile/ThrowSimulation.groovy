@@ -20,19 +20,20 @@ class ThrowSimulation {
         positions << projectile.position
     }
 
-    void simulateWhile(Closure<Boolean> condition, boolean sleepAfterMove=false) {
+    void simulateWhile(Closure<Boolean> condition, boolean sleepAfterMove = false, Closure callback = {}) {
         while (condition(projectile, time)) {
-            step()
+            step(sleepAfterMove, callback)
             if ( sleepAfterMove ) {
-                sleep((timeStep * 1000).setScale(0, RoundingMode.HALF_UP).intValue(), {condition={false}})
+                sleep((timeStep * 1000).setScale(0, RoundingMode.HALF_UP).intValue(), { condition = { a, b -> false } })
             }
-            println projectile.position
         }
     }
 
-    void step() {
+    void step(boolean sleepAfterMove, Closure callback = {}) {
         projectile.move(timeStep)
         positions << projectile.position
         time += timeStep
+        if (sleepAfterMove)
+            callback()
     }
 }

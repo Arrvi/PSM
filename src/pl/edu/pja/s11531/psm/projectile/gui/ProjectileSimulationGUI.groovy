@@ -1,10 +1,10 @@
 package pl.edu.pja.s11531.psm.projectile.gui
 
 import groovy.swing.SwingBuilder
-
+import pl.edu.pja.s11531.psm.AirFriction
 import pl.edu.pja.s11531.psm.ConstantGravityPull
 import pl.edu.pja.s11531.psm.projectile.EulerProjectileImpl
-import pl.edu.pja.s11531.psm.projectile.Projectile
+import pl.edu.pja.s11531.psm.projectile.MidpointProjectileImpl
 import pl.edu.pja.s11531.psm.projectile.ThrowSimulation
 
 import javax.swing.*
@@ -18,7 +18,7 @@ class ProjectileSimulationGUI {
     JFrame mainFrame
     Thread simulationThread
     SwingBuilder swingBuilder = new SwingBuilder()
-    SimulationParameters model = new SimulationParameters()
+    ProjectileParameters model = new ProjectileParameters()
 
     void buildGUI() {
         swingBuilder.edt {
@@ -66,6 +66,22 @@ class ProjectileSimulationGUI {
                         }
                         tr {
                             td {
+                                label 'Friction constant'
+                            }
+                            td(colfill: true) {
+                                textField(id: 'airFrictField', text: model.airFriction)
+                            }
+                        }
+                        tr {
+                            td {
+                                label 'Time step (ms)'
+                            }
+                            td(colfill: true) {
+                                textField(id: 'timeField', text: model.timeStep)
+                            }
+                        }
+                        tr {
+                            td {
                                 button(text: 'Stop', actionPerformed: { stopSimulation() })
                             }
                             td {
@@ -79,20 +95,32 @@ class ProjectileSimulationGUI {
                     angle: bind { parseBigDecimal(angleField.text) * Math.PI / 180 },
                     initialVelocity: bind { parseBigDecimal(initVelField.text) },
                     startX: bind { parseBigDecimal(startXField.text) },
-                    startY: bind { parseBigDecimal(startYField.text) })
+                    startY: bind { parseBigDecimal(startYField.text) },
+                    airFriction: bind { parseBigDecimal(airFrictField.text) },
+                    timeStep: bind { parseBigDecimal(timeField.text) })
         }
 
     }
 
     def startSimulation() {
         simulationPanel.simulations.clear()
-        def projectile = new EulerProjectileImpl(mass: 1.0, position: model.start, velocity: model.velocity)
-        projectile.externalForces << new ConstantGravityPull()
-        ThrowSimulation simulation = new ThrowSimulation(projectile, 0.03)
-        simulationPanel.simulations << simulation
+        def gravity = new ConstantGravityPull()
+        def air = new AirFriction(model.airFriction)
+        def projectile1 = new EulerProjectileImpl(mass: 1.0, position: model.start, velocity: model.velocity)
+        projectile1.externalForces << gravity
+        projectile1.externalForces << air
+        ThrowSimulation simulation1 = new ThrowSimulation(projectile1, model.timeStep / 1000)
+        simulationPanel.simulations << simulation1
+        def projectile2 = new MidpointProjectileImpl(mass: 1.0, position: model.start, velocity: model.velocity)
+        projectile2.externalForces << gravity
+        projectile2.externalForces << air
+        ThrowSimulation simulation2 = new ThrowSimulation(projectile2, model.timeStep / 1000)
+        simulationPanel.simulations << simulation2
         simulationThread = Thread.start {
-            simulation.simulateWhile({ Projectile proj, BigDecimal time -> proj.position[1] > -10.0 }, true) {
+            while (simulationPanel.simulations*.projectile.position.y.any { it > -10 }) {
+                simulationPanel.simulations*.step(false)
                 swingBuilder.edt { mainFrame.repaint() }
+                sleep(model.timeStep.intValue())
             }
         }
     }

@@ -18,6 +18,10 @@ abstract class Projectile extends MaterialPoint {
     }
 
     Vector getForce() {
+        getForce(position, velocity)
+    }
+
+    Vector getForce(Vector position, Vector velocity) {
         externalForces*.calculateForce(position, velocity).sum() as Vector
     }
 }

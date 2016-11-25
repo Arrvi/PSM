@@ -18,7 +18,8 @@ class ThrowSimulationPanel extends SimulationPanel {
     @Override
     void paintSimulation(Graphics g) {
         simulations.each {
-            it.positions.inject(null, { Vector prev, Vector curr ->
+            List<Vector> positionsBuffer = new ArrayList<>(it.positions)
+            positionsBuffer.inject(null, { Vector prev, Vector curr ->
                 if (prev != null) {
                     Vector a, b;
                     a = transformPoint(prev)

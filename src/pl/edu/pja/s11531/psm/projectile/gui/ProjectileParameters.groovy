@@ -7,7 +7,7 @@ import pl.edu.pja.s11531.psm.Vector
 /**
  * Created by s11531 on 2016-11-22.
  */
-class SimulationParameters {
+class ProjectileParameters {
     @Bindable
     BigDecimal angle = 45
     @Bindable
@@ -16,6 +16,10 @@ class SimulationParameters {
     BigDecimal startX = 2
     @Bindable
     BigDecimal startY = 2
+    @Bindable
+    BigDecimal airFriction = 0.5
+    @Bindable
+    BigDecimal timeStep = 50
 
     Vector getStart() {
         new Vector(startX, startY)

@@ -55,6 +55,10 @@ class Vector {
         this[2]
     }
 
+    BigDecimal getLength() {
+        Math.sqrt(scalars*.pow(2).sum())
+    }
+
     @Override
     String toString() {
         return "[${scalars.join(', ')}]"

@@ -13,7 +13,7 @@ import java.awt.*
 /**
  * Created by s11531 on 2016-11-15.
  */
-class ProjectileSimulation {
+class ProjectileSimulationGUI {
     ThrowSimulationPanel simulationPanel = new ThrowSimulationPanel()
     JFrame mainFrame
     Thread simulationThread
@@ -31,9 +31,7 @@ class ProjectileSimulation {
                     defaultCloseOperation: WindowConstants.EXIT_ON_CLOSE) {
                 borderLayout()
 
-                panel(simulationPanel, constraints: BorderLayout.CENTER) {
-                    label 'CANVAS'
-                }
+                panel(simulationPanel, constraints: BorderLayout.CENTER)
 
                 panel(constraints: BorderLayout.EAST) {
                     tableLayout {

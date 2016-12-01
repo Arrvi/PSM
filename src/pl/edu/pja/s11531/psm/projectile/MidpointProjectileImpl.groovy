@@ -5,7 +5,7 @@ import pl.edu.pja.s11531.psm.Vector
 /**
  * Created by s11531 on 2016-11-25.
  */
-class MidpointProjectileImpl extends Projectile {
+class MidpointProjectileImpl extends ProjectileImpl {
     @Override
     void move(BigDecimal timeChange) {
         def posT2 = position + velocity * (timeChange / 2)

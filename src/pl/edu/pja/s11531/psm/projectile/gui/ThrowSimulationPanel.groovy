@@ -1,13 +1,11 @@
 package pl.edu.pja.s11531.psm.projectile.gui
 
+import pl.edu.pja.s11531.psm.Vector
 import pl.edu.pja.s11531.psm.gui.SimulationPanel
 import pl.edu.pja.s11531.psm.projectile.ThrowSimulation
-import pl.edu.pja.s11531.psm.Vector
 
-import javax.swing.JPanel
-import java.awt.Color
-import java.awt.Graphics
-import java.math.RoundingMode
+import java.awt.*
+import java.util.List
 
 /**
  * Created by s11531 on 2016-11-18.

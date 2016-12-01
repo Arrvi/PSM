@@ -27,16 +27,24 @@ class Vector {
     }
 
     Vector plus(Vector vector) {
-        if ( size < vector.size ) return vector + this;
+        if (size < vector.size) return vector + this;
         Vector sum = new Vector(size)
-        for (def i in 0..(size-1)) {
+        for (def i in 0..(size - 1)) {
             sum.scalars[i] = i < vector.size ? vector.scalars[i] + this.scalars[i] : this.scalars[i]
         }
         return sum;
     }
 
+    Vector minus(Vector vector) {
+        return this + (vector * -1)
+    }
+
     Vector multiply(BigDecimal multiplier) {
         return new Vector(scalars.collect { it * multiplier }.toArray() as BigDecimal[])
+    }
+
+    Vector divide(BigDecimal divider) {
+        return this * (1 / divider)
     }
 
     BigDecimal getAt(int index) {
@@ -57,6 +65,10 @@ class Vector {
 
     BigDecimal getLength() {
         Math.sqrt(scalars*.pow(2).sum())
+    }
+
+    BigDecimal getAngle() {
+
     }
 
     @Override

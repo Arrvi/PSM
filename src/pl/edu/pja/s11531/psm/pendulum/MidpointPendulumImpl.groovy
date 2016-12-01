@@ -3,7 +3,7 @@ package pl.edu.pja.s11531.psm.pendulum
 /**
  * Created by s11531 on 2016-11-25.
  */
-class MidpointPendulumImpl extends Pendulum {
+class MidpointPendulumImpl extends PendulumImpl {
     BigDecimal direction = 1
     int swings = 0
 

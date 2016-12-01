@@ -5,7 +5,6 @@ import pl.edu.pja.s11531.psm.ConstantGravityPull
 import pl.edu.pja.s11531.psm.Vector
 import pl.edu.pja.s11531.psm.pendulum.EulerPendulumImpl
 import pl.edu.pja.s11531.psm.pendulum.MidpointPendulumImpl
-import pl.edu.pja.s11531.psm.pendulum.Pendulum
 import pl.edu.pja.s11531.psm.pendulum.PendulumSimulation
 
 import javax.swing.JFrame

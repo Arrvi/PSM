@@ -1,9 +1,9 @@
 package pl.edu.pja.s11531.psm
 
 /**
- * Created by s11531 on 2016-11-15.
+ * Created by kris on 12/1/16.
  */
-class MaterialPoint {
-    BigDecimal mass
-    Vector position
+interface MaterialPoint {
+    BigDecimal getMass()
+    Vector getPosition()
 }

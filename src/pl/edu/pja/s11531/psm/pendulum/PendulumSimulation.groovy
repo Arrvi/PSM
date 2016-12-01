@@ -8,10 +8,10 @@ import java.math.RoundingMode
 class PendulumSimulation {
     BigDecimal time = 0
     BigDecimal timeStep
-    Pendulum pendulum
+    PendulumImpl pendulum
     BigDecimal firstEnergy
 
-    PendulumSimulation(Pendulum pendulum, BigDecimal timeStep = 0.05) {
+    PendulumSimulation(PendulumImpl pendulum, BigDecimal timeStep = 0.05) {
         this.pendulum = pendulum
         this.timeStep = timeStep
     }

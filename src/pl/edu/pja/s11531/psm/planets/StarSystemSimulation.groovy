@@ -18,6 +18,8 @@ class StarSystemSimulation {
     }
 
     void step(BigDecimal deltaTime) {
-        bodiesToForces.keySet()*.move(deltaTime)
+        def bodies = bodiesToForces.keySet()
+        bodies*.calculateForce() // preserve state
+        bodies*.move(deltaTime)
     }
 }

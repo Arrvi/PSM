@@ -1,5 +1,6 @@
 package pl.edu.pja.s11531.psm.planets
 
+import pl.edu.pja.s11531.psm.Vector
 import pl.edu.pja.s11531.psm.projectile.MidpointProjectileImpl
 
 /**
@@ -7,4 +8,9 @@ import pl.edu.pja.s11531.psm.projectile.MidpointProjectileImpl
  */
 class MidpointCelestialBodyImpl extends MidpointProjectileImpl implements CelestialBody {
     BigDecimal size
+    Vector force
+
+    void calculateForce() {
+        force = super.force
+    }
 }

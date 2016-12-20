@@ -18,10 +18,10 @@ abstract class ProjectileImpl extends MaterialPointImpl implements Projectile {
 
     @Override
     Vector getForce() {
-        getForce(position, velocity)
+        getForce(this)
     }
 
-    Vector getForce(Vector position, Vector velocity) {
-        externalForces*.calculateForce(this).sum() as Vector
+    Vector getForce(Projectile projectile) {
+        externalForces*.calculateForce(projectile).sum() as Vector
     }
 }

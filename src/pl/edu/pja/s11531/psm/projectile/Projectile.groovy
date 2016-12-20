@@ -9,7 +9,7 @@ import pl.edu.pja.s11531.psm.Vector
  * Created by s11531 on 2016-11-15.
  */
 interface Projectile extends MaterialPoint {
-    void move(BigDecimal timeChange);
+    void move(BigDecimal timeChange)
 
     List<ExternalForce> getExternalForces()
 

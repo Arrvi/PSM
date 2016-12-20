@@ -7,4 +7,6 @@ import pl.edu.pja.s11531.psm.projectile.Projectile
  */
 interface CelestialBody extends Projectile {
     BigDecimal getSize()
+
+    void calculateForce()
 }

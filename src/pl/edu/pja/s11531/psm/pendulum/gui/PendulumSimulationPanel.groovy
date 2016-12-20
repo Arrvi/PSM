@@ -13,17 +13,17 @@ class PendulumSimulationPanel extends SimulationPanel {
     List<PendulumSimulation> simulations = new ArrayList<>();
 
     @Override
-    void paintSimulation(Graphics g) {
+    void paintSimulation(SimulationGraphics g) {
         simulations.each {
-            def anchor = transformPoint(it.pendulum.anchor)
-            def position = transformPoint(it.pendulum.position)
-            def velHead = transformPoint(it.pendulum.position + it.pendulum.velocity)
+            def anchor = it.pendulum.anchor
+            def position = it.pendulum.position
+            def velHead = it.pendulum.position + it.pendulum.velocity
 
             g.color = Color.BLACK
-            g.drawLine(anchor.x.intValue(), anchor.y.intValue(), position.x.intValue(), position.y.intValue())
-            g.drawArc(position.x.intValue() - 5, position.y.intValue() - 5, 10, 10, 0, 360)
+            g.drawLine(anchor, position)
+            g.drawCircleAround(position, 10)
             g.color = Color.BLUE
-            g.drawLine(position.x.intValue(), position.y.intValue(), velHead.x.intValue(), velHead.y.intValue())
+            g.drawLine(position, velHead)
         }
     }
 }

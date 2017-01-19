@@ -16,6 +16,7 @@ abstract class SimulationPanel extends JPanel {
     BigDecimal maxY = 20
     BigDecimal offsetY = 10
     BigDecimal offsetX = 0
+    BigDecimal markerHeight = 0.1
 
     abstract void paintSimulation(SimulationGraphics sg)
 
@@ -27,9 +28,15 @@ abstract class SimulationPanel extends JPanel {
         sg.color = Color.RED
         if (offsetY) {
             sg.drawLine new Vector(0.0, 0.0), new Vector(maxX, 0.0)
+            for ( int i = 1; i<maxY; i++ ) {
+                sg.drawLine new Vector(-markerHeight, i), new Vector(markerHeight, i)
+            }
         }
         if (offsetX) {
             sg.drawLine new Vector(0.0, 0.0), new Vector(0.0, maxY)
+            for ( int i = 1; i<maxX; i++ ) {
+                sg.drawLine new Vector(i, -markerHeight), new Vector(i, markerHeight)
+            }
         }
         sg.color = Color.BLACK
         paintSimulation(sg)
@@ -69,7 +76,12 @@ abstract class SimulationPanel extends JPanel {
         }
 
         void drawArcAround(Vector center, int width, int height, int startAngle, int arcAngle) {
-            drawArc center + new Vector(-width / 2, -height / 2), width, height, startAngle, arcAngle
+            int x, y
+            (x, y) = transformPoint(center)
+            x -= width / 2
+            y -= height / 2
+
+            graphics.drawArc x, y, width, height, startAngle, arcAngle
         }
 
         void drawEllipse(Vector bottomLeft, int width, int height) {

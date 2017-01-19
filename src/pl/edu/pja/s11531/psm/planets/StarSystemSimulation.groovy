@@ -1,6 +1,7 @@
 package pl.edu.pja.s11531.psm.planets
 
 import pl.edu.pja.s11531.psm.ExternalForce
+import pl.edu.pja.s11531.psm.Vector
 
 import java.math.RoundingMode
 
@@ -10,6 +11,10 @@ import java.math.RoundingMode
 class StarSystemSimulation {
     final Map<CelestialBody, ExternalForce> bodiesToForces = [:]
 
+    Set<CelestialBody> getBodies() {
+        bodiesToForces.keySet()
+    }
+
     void addBody(CelestialBody body) {
         body.externalForces.addAll bodiesToForces.values()
         def newGravity = new Gravity(body)
@@ -17,8 +22,12 @@ class StarSystemSimulation {
         bodiesToForces[body] = newGravity;
     }
 
+    Vector getCenterOfMass() {
+        BigDecimal systemMassInverted = 1 / (bodies*.mass.sum() as BigDecimal)
+        return bodies.collect {it.position * it.mass * systemMassInverted}.sum() as Vector
+    }
+
     void step(BigDecimal deltaTime) {
-        def bodies = bodiesToForces.keySet()
         bodies*.calculateForce() // preserve state
         bodies*.move(deltaTime)
     }

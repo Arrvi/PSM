@@ -4,6 +4,7 @@ import pl.edu.pja.s11531.psm.gui.SimulationPanel
 import pl.edu.pja.s11531.psm.planets.StarSystemSimulation
 
 import javax.swing.JPanel
+import java.awt.Color
 import java.awt.Graphics
 
 /**
@@ -13,7 +14,13 @@ class StarSystemSimulationPanel extends SimulationPanel {
     StarSystemSimulation simulation
 
     @Override
-    void paintSimulation(Graphics g) {
-
+    void paintSimulation(SimulationGraphics sg) {
+        simulation.bodies.each {
+            sg.color = Color.black
+            sg.drawCircleAround it.position, it.size.intValue()
+            sg.drawLine it.position, it.position + it.force
+        }
+        sg.color = Color.magenta
+        sg.drawCircleAround simulation.centerOfMass, 5
     }
 }

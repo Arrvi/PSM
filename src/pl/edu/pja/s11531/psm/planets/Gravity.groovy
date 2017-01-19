@@ -9,7 +9,7 @@ import pl.edu.pja.s11531.psm.projectile.Projectile
  * Created by kris on 12/1/16.
  */
 class Gravity implements ExternalForce {
-    static final BigDecimal GRAVITATIONAL_CONSTANT = BigDecimal.valueOf(6674, -14) // 6674*10^-14
+    static final BigDecimal GRAVITATIONAL_CONSTANT = BigDecimal.valueOf(6674, 14) // 6674*10^-14
     MaterialPoint center
 
     Gravity(MaterialPoint center) {

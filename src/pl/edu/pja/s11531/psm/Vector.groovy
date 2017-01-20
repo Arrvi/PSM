@@ -78,7 +78,7 @@ class Vector {
     }
 
     BigDecimal getAngle() {
-
+        Math.atan2(this[0], this[1])
     }
 
     private void ensureScale() {

@@ -109,5 +109,9 @@ abstract class SimulationPanel extends JPanel {
                     .collect { it.setScale(0, RoundingMode.HALF_UP) }    \
                     *.intValue()
         }
+
+        public int transformLength(BigDecimal len) {
+            width * len / maxX
+        }
     }
 }

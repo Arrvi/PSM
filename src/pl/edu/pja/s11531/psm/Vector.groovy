@@ -53,7 +53,7 @@ class Vector {
     }
 
     BigDecimal getAt(int index) {
-        scalars[index] ?: 0.0
+        index < scalars.length ? scalars[index] : 0.0
     }
 
     void putAt(int index, BigDecimal value) {

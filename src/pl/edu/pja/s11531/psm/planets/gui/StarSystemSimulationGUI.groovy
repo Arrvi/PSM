@@ -50,15 +50,15 @@ class StarSystemSimulationGUI {
         def star = new MidpointCelestialBodyImpl(
                 position: new Vector(10, 10), velocity: new Vector(0, 0),
                 size: 30, mass: 15000000000)
-        def planet = new MidpointCelestialBodyImpl(
-                position: new Vector(10, 3), velocity: new Vector(0, 0),
-                size: 10, mass: 100000000)
         def planet2 = new MidpointCelestialBodyImpl(
                 position: new Vector(10, 13), velocity: new Vector(0, 0),
                 size: 10, mass: 10000000)
+        def planet = new MidpointCelestialBodyImpl(
+                position: new Vector(10, 3), velocity: new Vector(0, 0),
+                size: 10, mass: 100000000)
         def moon = new MidpointCelestialBodyImpl(
                 position: new Vector(10, 2.5), velocity: new Vector(-0.95, 0),
-                size: 5, mass: 1)
+                size: 5, mass: 1000)
         simulationPanel.simulation.addBody star
         simulationPanel.simulation.addBody planet
         simulationPanel.simulation.addBody planet2

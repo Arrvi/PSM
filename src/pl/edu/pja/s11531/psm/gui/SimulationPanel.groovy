@@ -1,6 +1,7 @@
 package pl.edu.pja.s11531.psm.gui
 
 import pl.edu.pja.s11531.psm.Vector
+import sun.java2d.SunGraphics2D
 
 import javax.swing.JPanel
 import java.awt.Color
@@ -23,7 +24,7 @@ abstract class SimulationPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g)
-        SimulationGraphics sg = new SimulationGraphics(g);
+        SimulationGraphics sg = new SimulationGraphics(g as Graphics2D);
 
         sg.color = Color.RED
         if (offsetY) {
@@ -50,10 +51,10 @@ abstract class SimulationPanel extends JPanel {
 
     class SimulationGraphics {
         @Delegate
-        private Graphics graphics
+        private Graphics2D graphics
 
-        SimulationGraphics(Graphics graphics) {
-            ((Graphics2D) graphics).setRenderingHint(
+        SimulationGraphics(Graphics2D graphics) {
+            graphics.setRenderingHint(
                     RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
 

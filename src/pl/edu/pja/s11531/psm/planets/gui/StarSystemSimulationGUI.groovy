@@ -7,6 +7,7 @@ import pl.edu.pja.s11531.psm.pendulum.EulerPendulumImpl
 import pl.edu.pja.s11531.psm.pendulum.MidpointPendulumImpl
 import pl.edu.pja.s11531.psm.pendulum.PendulumSimulation
 import pl.edu.pja.s11531.psm.planets.CelestialBody
+import pl.edu.pja.s11531.psm.planets.Gravity
 import pl.edu.pja.s11531.psm.planets.MidpointCelestialBodyImpl
 import pl.edu.pja.s11531.psm.planets.StarSystemSimulation
 import pl.edu.pja.s11531.psm.planets.gui.StarSystemSimulationPanel
@@ -30,7 +31,7 @@ class StarSystemSimulationGUI {
             lookAndFeel UIManager.getSystemLookAndFeelClassName()
             mainFrame = frame(
                     title: 'Star System Simulation',
-                    size: [600, 400],
+                    size: [1000, 600],
                     show: true,
                     locationRelativeTo: null,
                     defaultCloseOperation: WindowConstants.EXIT_ON_CLOSE) {
@@ -46,15 +47,30 @@ class StarSystemSimulationGUI {
 
     def startSimulation() {
         simulationPanel.simulation = new StarSystemSimulation()
-        simulationPanel.simulation.addBody new MidpointCelestialBodyImpl(
+        def star = new MidpointCelestialBodyImpl(
                 position: new Vector(10, 10), velocity: new Vector(0, 0),
-                size: 30, mass: 10000000000)
-        simulationPanel.simulation.addBody new MidpointCelestialBodyImpl(
-                position: new Vector(10, 5), velocity: new Vector(-1, 0),
-                size: 10, mass: 1000)
-        simulationPanel.simulation.addBody new MidpointCelestialBodyImpl(
-                position: new Vector(10, 4.5), velocity: new Vector(-0.9, 0),
+                size: 30, mass: 15000000000)
+        def planet = new MidpointCelestialBodyImpl(
+                position: new Vector(10, 3), velocity: new Vector(0, 0),
+                size: 10, mass: 100000000)
+        def planet2 = new MidpointCelestialBodyImpl(
+                position: new Vector(10, 13), velocity: new Vector(0, 0),
+                size: 10, mass: 10000000)
+        def moon = new MidpointCelestialBodyImpl(
+                position: new Vector(10, 2.5), velocity: new Vector(-0.95, 0),
                 size: 5, mass: 1)
+        simulationPanel.simulation.addBody star
+        simulationPanel.simulation.addBody planet
+        simulationPanel.simulation.addBody planet2
+        simulationPanel.simulation.addBody moon
+
+        planet.velocity = (simulationPanel.simulation.bodiesToForces[star] as Gravity)
+                .escapeVelocity(planet)
+        planet2.velocity = (simulationPanel.simulation.bodiesToForces[star] as Gravity)
+                .escapeVelocity(planet2)
+        moon.velocity = (simulationPanel.simulation.bodiesToForces[planet] as Gravity)
+                .escapeVelocity(moon) * -1 + planet.velocity
+
         simulationThread = Thread.start {
             while (1) {
                 simulationPanel.simulation.step(0.1)

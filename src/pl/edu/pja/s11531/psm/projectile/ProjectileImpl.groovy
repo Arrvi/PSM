@@ -18,7 +18,7 @@ abstract class ProjectileImpl extends MaterialPointImpl implements Projectile {
 
     @Override
     Vector getForce() {
-        getForce(this)
+        getForce(this) ?: new Vector(0.0)
     }
 
     Vector getForce(Projectile projectile) {

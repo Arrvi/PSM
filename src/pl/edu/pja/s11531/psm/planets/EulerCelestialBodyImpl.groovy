@@ -8,7 +8,7 @@ import pl.edu.pja.s11531.psm.projectile.EulerProjectileImpl
  */
 class EulerCelestialBodyImpl extends EulerProjectileImpl implements CelestialBody {
     BigDecimal size
-    Vector force
+    Vector force = new Vector(0.0)
 
     void calculateForce() {
         force = super.force
